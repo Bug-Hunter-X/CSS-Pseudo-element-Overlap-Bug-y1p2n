@@ -1,0 +1,23 @@
+The issue is resolved by explicitly setting the `position` property of both the parent container and the pseudo-element.  Also, ensuring the correct `z-index` value is crucial to manage stacking order.  The pseudo-element should have a `z-index` greater than its siblings and parent if it needs to appear on top.
+
+```css
+/* bugSolution.css */
+.container {
+  position: relative; /* Ensures pseudo-element is positioned relative to this element */
+  width: 200px;
+  height: 200px;
+  background-color: lightblue;
+}
+
+.container::before {
+  content: "Overlay";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1; /* Ensure it's above the parent and siblings */
+  background-color: rgba(255, 0, 0, 0.5);
+  padding: 10px;
+}
+
+/*other elements in the DOM*/
+```
